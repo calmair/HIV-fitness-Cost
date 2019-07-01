@@ -9,8 +9,8 @@ library(RColorBrewer)
 #Script to analyse the frequency data and associate with features for Zanini data. 
 #Read the csv files 
 
-consensusfasta<-read.dna("./Data/HIV1_CON_2004_POL_DNA.fasta", format = "fasta",as.character=TRUE)
-consensusB<-consensusfasta$CONSENSUS_B[551:873]
+consensusfasta<-read.dna("./Data/Modified_Sequences_Aligned2_Consensus/modifiedconsensusBsequence", format = "fasta",as.character=TRUE)
+consensusB<-consensusfasta[1:9719] #changed consensus B to include whole genome
 
 transition<-function(nuc){
   if (nuc=="a") {return("g")
@@ -22,6 +22,16 @@ transition<-function(nuc){
   if (nuc=="t") {return("c")
   }
 }
+
+#Insert typeofsitefunction
+typeofsitefunction<-function(WTcodon, mutantcodon){
+  WTAA<-seqinr::translate(WTcodon)
+  MUTAA<-seqinr::translate(mutantcodon)
+  if (WTAA == MUTAA) return ("syn")
+  else if (MUTAA == "*") return ("stop")
+  else return ("nonsyn")
+}
+
 
 
 TypeOfSite<-c()
@@ -101,6 +111,8 @@ for (i in 1:numsitesZanini){
 }
 
 #Add whether CpG sites
+#Need to edit to add C&G
+#Current ones determined are A&T
 OverviewDFZanini$makesCpG <- 0
 for(i in 1:nrow(OverviewDFZanini)){
   trip <- OverviewDFZanini$WTnt[c(i-1, i, i + 1)]

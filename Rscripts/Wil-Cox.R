@@ -5,16 +5,24 @@
   data<-read.table("Output/OverviewSelCoeffZanini.csv",sep=",",header=TRUE,row.names=1)
   #This function is going to read the data from the csv files 
   
+  data1<- OverviewDFZanini[1:454,1:12]
+  data2<- OverviewDFZanini[551:635,1:12]
+  data3<- OverviewDFZanini[790:8653,1:12]
+  data4<- OverviewDFZanini[8797:9417,1:12]
+  
+  for (j in 1:4){
   
   pVals = c()
   shrtval = 0
   options(scipen=999)
   #prevents pvalues from becoming scientific notation. 
   
-  array1 = data$colMeansTsZanini[data$WTnt =="a" & data$TypeOfSite == 'syn' & data$makesCpG == 1]
-  array2 = data$colMeansTsZanini[data$WTnt =="a" & data$TypeOfSite == 'syn' & data$makesCpG == 0]
-  CpGa = data$colMeansTsZanini[data$WTnt =="a" & data$makesCpG == 1]
-  nonCpGa = data$colMeansTsZanini[data$WTnt =="a" &  data$makesCpG == 0]
+  
+  
+  array1 = get(paste("data",j,sep = ""))$colMeansTsZanini[get(paste("data",j,sep = ""))$WTnt =="a" & get(paste("data",j,sep = ""))$TypeOfSite == 'syn' & get(paste("data",j,sep = ""))$makesCpG == 1]
+  array2 = get(paste("data",j,sep = ""))$colMeansTsZanini[get(paste("data",j,sep = ""))$WTnt =="a" & get(paste("data",j,sep = ""))$TypeOfSite == 'syn' & get(paste("data",j,sep = ""))$makesCpG == 0]
+  CpGa = get(paste("data",j,sep = ""))$colMeansTsZanini[get(paste("data",j,sep = ""))$WTnt =="a" & get(paste("data",j,sep = ""))$makesCpG == 1]
+  nonCpGa = get(paste("data",j,sep = ""))$colMeansTsZanini[get(paste("data",j,sep = ""))$WTnt =="a" &  get(paste("data",j,sep = ""))$makesCpG == 0]
   
   print("For a: Comparing makes CpG with noCpG (syn). Wilcox test less: red/blue")
   print(wilcox.test(array1, array2, alternative='less'))
@@ -24,12 +32,12 @@
   
   
   
-  array5 = data$colMeansTsZanini[data$WTnt =="t" & data$TypeOfSite == 'syn' & data$makesCpG == 1]
+  array5 = get(paste("data",j,sep = ""))$colMeansTsZanini[get(paste("data",j,sep = ""))$WTnt =="t" & get(paste("data",j,sep = ""))$TypeOfSite == 'syn' & get(paste("data",j,sep = ""))$makesCpG == 1]
   print(array5)
-  array6 = data$colMeansTsZanini[data$WTnt =="t" & data$TypeOfSite == 'syn' & data$makesCpG == 0]
+  array6 = get(paste("data",j,sep = ""))$colMeansTsZanini[get(paste("data",j,sep = ""))$WTnt =="t" & get(paste("data",j,sep = ""))$TypeOfSite == 'syn' & get(paste("data",j,sep = ""))$makesCpG == 0]
   print(array6)
-  CpGt = data$colMeansTsZanini[data$WTnt =="t" & data$makesCpG == 1]
-  nonCpGt = data$colMeansTsZanini[data$WTnt =="t" &  data$makesCpG == 0]
+  CpGt = get(paste("data",j,sep = ""))$colMeansTsZanini[get(paste("data",j,sep = ""))$WTnt =="t" & get(paste("data",j,sep = ""))$makesCpG == 1]
+  nonCpGt = get(paste("data",j,sep = ""))$colMeansTsZanini[get(paste("data",j,sep = ""))$WTnt =="t" &  get(paste("data",j,sep = ""))$makesCpG == 0]
   
   print("For t: Comparing makes CpG with noCpG (syn). Wilcox test less: red/blue")
   print(wilcox.test(array5, array6, alternative='less'))
@@ -42,8 +50,8 @@ print(Pvalues)
 
   options(scipen = 999)
   #setwd("output/redeploy/")
-  truenamepdf= paste("Output/","P-values",".pdf",sep="")
-  truenamepng= paste("P-values","tables", ".png", sep="")
+  truenamepdf= paste("Output/","P-values",j,".pdf",sep="")
+  truenamepng= paste("P-values","tables",j, ".png", sep="")
   #print(truenamepdf)
   #prevents pvalues from becoming scientific notation
   options(warn=-1)
@@ -88,4 +96,4 @@ print(Pvalues)
   print("end")
   #dev.copy(pdf, truenamepng)
   dev.off()
-
+}
