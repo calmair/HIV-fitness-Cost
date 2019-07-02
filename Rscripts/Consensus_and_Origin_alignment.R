@@ -8,7 +8,7 @@ library(plotrix)
 library(RColorBrewer)
 library(DataCombine)
 
-
+#creates modified sequences and frequency tables
 
 #add more extensive comments
 AlignedCount<-data.frame()
@@ -97,7 +97,7 @@ for (i in 1:length(ZaniniFiles)){ #rows 72
       }
   }
 }
-#Aligned_Geneious[[1]]<-Aligned_Geneious[[1]][-addressdeletion]
-#write.fasta(Aligned_Geneious[1], names ="consensus_B"  ,file.out = paste("/Users/Calmair/HIV/Data/Modified_Sequences_Aligned2_Consensus/modifiedconsensusBsequence"), open = "w")
+Aligned_Geneious[[1]]<-Aligned_Geneious[[1]][-addressdeletion]
+write.fasta(Aligned_Geneious[1], names ="consensus_B"  ,file.out = paste("/Users/Calmair/HIV/Data/Modified_Sequences_Aligned2_Consensus/modifiedconsensusBsequence"), open = "w")
 
 

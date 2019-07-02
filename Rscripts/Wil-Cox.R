@@ -5,12 +5,15 @@
   data<-read.table("Output/OverviewSelCoeffZanini.csv",sep=",",header=TRUE,row.names=1)
   #This function is going to read the data from the csv files 
   
-  data1<- OverviewDFZanini[1:454,1:12]
-  data2<- OverviewDFZanini[551:635,1:12]
-  data3<- OverviewDFZanini[790:8653,1:12]
-  data4<- OverviewDFZanini[8797:9417,1:12]
+  data1<- OverviewDFZanini[548:634,1:10] #5LTR
+  data2<- OverviewDFZanini[790:2292,1:10] #Gag
+  data3<- OverviewDFZanini[2085:5096,1:10] #pol
+  data4<- OverviewDFZanini[5041:6062,1:10] #vif, vpr, vpu
+  data5<- OverviewDFZanini[6225:8795,1:10] #env
+  data6<- OverviewDFZanini[8797:9417,1:10] #nef
+  data7<- OverviewDFZanini[9086:9591,1:10] #3LTR
   
-  for (j in 1:4){
+  for (j in 1:7){
   
   pVals = c()
   shrtval = 0

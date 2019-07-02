@@ -7,6 +7,9 @@ library(scales)
 library(plotrix)
 library(RColorBrewer)
 
+#NEED TO FURTHER ANALYZE ON WHY THERE IS AN ABUNDANCE OF 0.5 FREQS THIS MAY BE LEADING TO THE FINAL PRODUCT NOT BEING SIGNIFICANT
+#0.5 was created when all row were all zero's
+
 consensusfasta<-read.dna("./Data/Modified_Sequences_Aligned2_Consensus/modifiedconsensusBsequence", format = "fasta",as.character=TRUE)
 consensusB<-consensusfasta[1:9719] #changed consensus B to include whole genome
 #* Transition function*
@@ -50,7 +53,8 @@ for (i in 1:length(ZaniniFiles)){
   
   #determine Ts freq of every site. 
   SeqData$freq<-0
-  
+  #check out freq at 6658
+  #for i == 13:16
   for (k in 1:length(SeqData$consensusB)){#for each site in the sequence
     
     MutNum<- SeqData [k,which(c("a","c","g","t")==SeqData$transition[k])]
@@ -61,6 +65,7 @@ for (i in 1:length(ZaniniFiles)){
       SeqData$freq[k]<-as.numeric(MutNum)/(as.numeric(MutNum)+as.numeric(WTNum)) 
       #if (as.numeric(MutNum)>=as.numeric(WTNum))SeqData$freq[k]<-NA #filter majority manority out 
     }
+    if(WTNum == 0){SeqData$freq[k]<-0}
     freqPatTs_Zanini[i,k]<-SeqData$freq[k]
   }
   
