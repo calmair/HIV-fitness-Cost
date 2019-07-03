@@ -56,9 +56,11 @@ EstimatedS <- function(mu, meanfreq){
 read.table("Output/freqPatTs_Zanini.csv",sep=",",header=TRUE,row.names=1)->freqPatTsZanini
 #has 69 observations
 #CHANGE ALL 0'S IN freqPatTsZanini into NA just so mean values are not skewed
-freqPatTsZanini[freqPatTsZanini == 0] <- NA
+
+#freqPatTsZanini[freqPatTsZanini == 0] <- NA
 colMeansTsZanini<-apply(freqPatTsZanini, 2 , mean, na.rm=TRUE) #FINDS THE MEAN for all 69 rows
 #what does the 2 mean?
+
 ## Create overview dataframe and plot site frequency spectra 
 #Only synonymous, non-synomous and stop codons are considered
 #- for each mutation, determine whether it is synonymous, non-synonymous or creates a stop

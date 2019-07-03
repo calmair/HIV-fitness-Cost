@@ -62,7 +62,7 @@ for (i in 1:length(ZaniniFiles)){
     
     if(WTNum =="-"){SeqData$freq[k]<-0}
     if(WTNum !="-"){
-      SeqData$freq[k]<-as.numeric(MutNum)/(as.numeric(MutNum)+as.numeric(WTNum)) 
+      SeqData$freq[k]<-as.numeric(as.character(MutNum))/(as.numeric(as.character(MutNum))+as.numeric(as.character(WTNum))) 
       #if (as.numeric(MutNum)>=as.numeric(WTNum))SeqData$freq[k]<-NA #filter majority manority out 
     }
     if(WTNum == 0){SeqData$freq[k]<-0}

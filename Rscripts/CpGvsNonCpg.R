@@ -10,17 +10,17 @@ library(RColorBrewer)
 #need to make this into a function to make a .png for each gene
 
 OverviewDFZanini<-read.table("Output/OverviewSelCoeffZanini.csv",sep=",",header=TRUE,row.names=1)
-dim(OverviewDFZanini)
+
 #548 is when data is not zero
 #9591 is when zero's appear again
-
-OverviewDFZanini1<- OverviewDFZanini[548:634,1:10] #5LTR
-OverviewDFZanini2<- OverviewDFZanini[790:2292,1:10] #Gag
-OverviewDFZanini3<- OverviewDFZanini[2085:5096,1:10] #pol
-OverviewDFZanini4<- OverviewDFZanini[5041:6062,1:10] #vif, vpr, vpu
-OverviewDFZanini5<- OverviewDFZanini[6225:8795,1:10] #env
-OverviewDFZanini6<- OverviewDFZanini[8797:9417,1:10] #nef
-OverviewDFZanini7<- OverviewDFZanini[9086:9591,1:10] #3LTR
+fingernotes <-c("5LTR","Gag","Pol","Vif,Vpr,Vpu","Env","Nef","3LTR")
+OverviewDFZanini1<- OverviewDFZanini[1:634,1:12] #5LTR
+OverviewDFZanini2<- OverviewDFZanini[790:2292,1:12] #Gag
+OverviewDFZanini3<- OverviewDFZanini[2293:5096,1:12] #pol
+OverviewDFZanini4<- OverviewDFZanini[5097:6062,1:12] #vif, vpr, vpu
+OverviewDFZanini5<- OverviewDFZanini[6225:8795,1:12] #env
+OverviewDFZanini6<- OverviewDFZanini[8797:9417,1:12] #nef
+OverviewDFZanini7<- OverviewDFZanini[9086:9719,1:12] #3LTR
 
 for (j in 1:7){
 print(j)
@@ -114,10 +114,12 @@ AllG[(which(AllG$makesCpG == 0 & AllG$TypeOfSite == "syn") ),13] <- mean(AllG$co
 
 #####################################################################
 
-truenamepng = paste("Output/CpG_vs_NonCpG",j,".png",sep="")
+
+truenamepng = paste("Output/",fingernotes[j],".png",sep="")
 png(truenamepng, width = 6.75, height = 6.75, units = "in", res= 300)
 par(mfrow=c(2,2), mar=c(4.1, 4.1, 1.9, 0.8),oma=c(0.1,0.1,1.5,0.1)) 
 palette(alpha(c("#2E4C2E","#38385D","#FF9900","#FF3300"),0.3))
+
 
 plot(AllA$graphit, AllA$meanofmeans_value,log='y',col=factor(AllA$graphit),pch=19,cex = 3, main="A->G",xlab = " ", ylab = "Mutation Frequency", yaxt="n", xaxt="n", ylim=c(0.0001, 0.5),xlim=c(.5,2.5))
 #plot all points used from mean function onto 1 & 2
@@ -134,7 +136,7 @@ eaxis(2,at=c(10^-3,10^-2,10^-1,10^0),cex.axis=1.1)
 axis(1, at= c(1:4),labels = c("No CpG ", " CpG ", "No CpG \n NonSyn", "CpG \n NonSyn"), mgp=c(3, 1.5, 0))
 axis.break(2,0.0002*(1+0.02),breakcol="black",style="slash")
 mtext('0', side=2, line=1.5, at=0.0001, las=1.1)
-mtext("5'UTR", outer=TRUE, adj=0.55, cex=1.7, line=0.01)
+mtext(fingernotes[j], outer=TRUE, adj=0.55, cex=1.7, line=0.01)
 
 
 
@@ -200,6 +202,7 @@ mtext('0', side=2, line=1.5, at=0.0001, las=1.1)
 
 palette(alpha(c("#99FF99","#FF9900"),0.3))
 dev.off()
+
 }
 
 

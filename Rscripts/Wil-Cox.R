@@ -4,14 +4,14 @@
   
   data<-read.table("Output/OverviewSelCoeffZanini.csv",sep=",",header=TRUE,row.names=1)
   #This function is going to read the data from the csv files 
-  
-  data1<- OverviewDFZanini[548:634,1:10] #5LTR
-  data2<- OverviewDFZanini[790:2292,1:10] #Gag
-  data3<- OverviewDFZanini[2085:5096,1:10] #pol
-  data4<- OverviewDFZanini[5041:6062,1:10] #vif, vpr, vpu
-  data5<- OverviewDFZanini[6225:8795,1:10] #env
-  data6<- OverviewDFZanini[8797:9417,1:10] #nef
-  data7<- OverviewDFZanini[9086:9591,1:10] #3LTR
+  fingernotes <-c("5LTR","Gag","Pol","Vif,Vpr,Vpu","Env","Nef","3LTR")
+  data1<- OverviewDFZanini[1:634,1:12] #5LTR
+  data2<- OverviewDFZanini[790:2292,1:12] #Gag
+  data3<- OverviewDFZanini[2293:5096,1:12] #pol
+  data4<- OverviewDFZanini[5097:6062,1:12] #vif, vpr, vpu
+  data5<- OverviewDFZanini[6225:8795,1:12] #env
+  data6<- OverviewDFZanini[8797:9417,1:12] #nef
+  data7<- OverviewDFZanini[9417:9719,1:12] #3LTR
   
   for (j in 1:7){
   
@@ -53,7 +53,7 @@ print(Pvalues)
 
   options(scipen = 999)
   #setwd("output/redeploy/")
-  truenamepdf= paste("Output/","P-values",j,".pdf",sep="")
+  truenamepdf= paste("Output/",fingernotes[j],".pdf",sep="")
   truenamepng= paste("P-values","tables",j, ".png", sep="")
   #print(truenamepdf)
   #prevents pvalues from becoming scientific notation
