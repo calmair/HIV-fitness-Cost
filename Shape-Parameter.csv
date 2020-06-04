@@ -1,0 +1,3 @@
+#Shape-Parameter.csv
+
+GenomeShape<-read.delim("./Data/shape-parameters.txt", header = TRUE, sep = "\t", dec = ".")

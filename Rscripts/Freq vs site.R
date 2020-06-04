@@ -13,7 +13,7 @@ OverviewDFZanini<-read.table("Output/OverviewSelCoeffZanini.csv",sep=",",header=
 truenamepng = paste("Output/FreqvsSite.png",sep="")
 png(truenamepng, width = 30, height = 7.5, units = "in",pointsize = 5, res= 1000)
 #edit to give each nucliec acid a different color
-OverviewDFZanini$Colour="#8b9dff"
+OverviewDFZanini$Colour[OverviewDFZanini$WTnt=="a"]="#8b9dff"
 OverviewDFZanini$Colour[OverviewDFZanini$WTnt=="t"]="#ffdf8f"
 OverviewDFZanini$Colour[OverviewDFZanini$WTnt=="c"]="#ff83a2"
 OverviewDFZanini$Colour[OverviewDFZanini$WTnt=="g"]="#74ff9b"

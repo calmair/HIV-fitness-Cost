@@ -1,6 +1,4 @@
-# http://www.nature.com/nature/journal/v460/n7256/suppinfo/nature08237.html
-# This file contains dataset S2 which shows all SHAPE reactivities and pairing probabilities for the NL4-3 HIV-1 RNA genome in tab-delimited ascii format. Columns are: nucleotide position, nucleotide identity, SHAPE reactivity, pairing probability
-
+WT	Shape	Prob						  
 1	G		0.88						
 2	G		0.84						
 3	U		0.73						
